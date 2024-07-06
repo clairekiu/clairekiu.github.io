@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Chemistry on @nimeajku</title>
+    <link>http://localhost:1313/tags/chemistry/</link>
+    <description>Recent content in Chemistry on @nimeajku</description>
+    <generator>Hugo -- 0.128.2</generator>
+    <language>kr-ko</language>
+    <lastBuildDate>Sun, 07 Jul 2024 00:14:10 +0900</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/chemistry/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Alkane의 회전 에너지 도표</title>
+      <link>http://localhost:1313/post/rotational-alkane/</link>
+      <pubDate>Sun, 07 Jul 2024 00:14:10 +0900</pubDate>
+      <guid>http://localhost:1313/post/rotational-alkane/</guid>
+      <description> $\sigma$ bond는 축상결합을 하기 때문에 단일결합을 축으로 회전이 가능하다. $\pi$ bond는 축을 벗어난 결합을 하기 위해 회전이 불가능하다. 회전이 일어나는 경우 $\pi$ bond가 깨진다. Alkane은 단일 결합을 가지고 있어서 회전이 가능하다. Alkene은 이중 결합을 가지고 있어서 불가능하다 &amp;ndash; 이중 결합은 하나의 $\sigma$ bond랑 $\pi$ bond를 갖기 때문 1. Ethane ($C_6 H_6$) </description>
+    </item>
+  </channel>
+</rss>
