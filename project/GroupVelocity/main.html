@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GroupVelocity</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <style>
+    body { margin: 20px; }
+    canvas { display: block; }
+    script-container { margin: 20px; text-align: center; }
+  </style>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div>
+    <h1>Group Velocity Visualization</h1>
+    <h2>파동의 중첩과 군속도 시각화</h2>
+    <ul>
+      <li> 검은색은 미소 파수, 각진동수 값 차이를 가지는 파동을 나타낸 것</li>
+      <li> 빨간색은 5개의 검은색 파동을 중첩한 것.</li>
+    </ul>
+    <ul>
+      <li> Processing을 통해 구현 후 p5.js로 변환</li>
+    </ul>
+  </div>
+  <div class="script-container">
+    <script src="sketch.js"></script>
+  </div>
+  <script>
+    function goBackToMain() {
+        window.location.href = '../../index.html';
+    }
+  </script>
+  <!-- <div class="button-container">
+    <button class="go-back-button" onclick="goBackToMain()">Main</button>
+  </div> -->
+</body>
+</html>
