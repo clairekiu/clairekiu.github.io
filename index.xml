@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>@nimeajku</title>
-    <link>http://localhost:1313/</link>
+    <link>https://clairekiu.github.io/</link>
     <description>Recent content on @nimeajku</description>
     <generator>Hugo -- 0.128.2</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 06 Jul 2024 22:26:52 +0900</lastBuildDate>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://clairekiu.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Visionboard</title>
-      <link>http://localhost:1313/post/visionboard/</link>
+      <link>https://clairekiu.github.io/post/visionboard/</link>
       <pubDate>Sat, 06 Jul 2024 22:26:52 +0900</pubDate>
-      <guid>http://localhost:1313/post/visionboard/</guid>
+      <guid>https://clairekiu.github.io/post/visionboard/</guid>
       <description>자기상실보단 나르시즘이 낫다.
 우울할 땐 명상 5분에 좋아하는 노래를 들으며 책 읽기 그리고 화장
 우울할 땐 자기계발
@@ -28,18 +28,18 @@
     </item>
     <item>
       <title>Factfulness</title>
-      <link>http://localhost:1313/post/factfulness/</link>
+      <link>https://clairekiu.github.io/post/factfulness/</link>
       <pubDate>Sat, 06 Jul 2024 22:24:12 +0900</pubDate>
-      <guid>http://localhost:1313/post/factfulness/</guid>
+      <guid>https://clairekiu.github.io/post/factfulness/</guid>
       <description>머리말 사람들은 14가지 문항에 잘 답하지 못한다 — 침팬지보다 낮은 점수
 이 책을 출간한 이유: 세계의 사실을 묻는 문제를 왜 못 맞히는지에 대해? 세계를 해석하는 도구를 제공.
 한마디로 세상에 대해 생각하라. 상황은 안 좋고, 문제는 점점 심각해지는 것만 같다. 안 그런가? 부자는 더 부자가 되고 가난한 사람은 더 가난해지며, 빈곤층은 더욱 늘어간다. 극적인 조치를 취하지 않으면 자원은 곧 동나고 말 것이다. 적어도 서양인 대부분이 언론에서 보고 머릿속에 담아둔 그림은 그렇다. 나는 그것을 ‘과도하게 극적인 세계관’이라고 부른다.</description>
     </item>
     <item>
       <title>Test</title>
-      <link>http://localhost:1313/post/test/</link>
+      <link>https://clairekiu.github.io/post/test/</link>
       <pubDate>Sat, 06 Jul 2024 21:47:33 +0900</pubDate>
-      <guid>http://localhost:1313/post/test/</guid>
+      <guid>https://clairekiu.github.io/post/test/</guid>
       <description>테스트 파일입니다.</description>
     </item>
   </channel>
