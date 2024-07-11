@@ -115,7 +115,7 @@
     </nav>
 </header>
 <main class="main"> 
-<header class="page-header"><div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/tags/">Tags</a></div>
+<header class="page-header"><div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/tags/">Tag</a></div>
   <h1>
     Chemistry
   </h1>
@@ -124,7 +124,26 @@
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
     <h2 class="entry-hint-parent">
-      <a href="http://localhost:1313/computer-science/segment-tree/">[자료구조] 세그먼트 트리 (Segment Tree)</a>
+      <a href="http://localhost:1313/computer-science/boj/2042/">백준 2042: 구간 합 구하기</a>
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>전체 코드 #include &lt;iostream&gt; using namespace std; using ll = long long; ll N, M, K; ll seg[4000000]; ll arr[4000000]; void init(ll l, ll r, ll v){ if(l==r){ seg[v]=arr[l]; } else{ ll mid = (l&#43;r)/2; init(l, mid, 2*v); init(mid&#43;1, r, 2*v&#43;1); seg[v] = seg[2*v] &#43; seg[2*v&#43;1]; } } void update(ll l, ll r, ll v, ll t, ll val){ if(l==r){ seg[v] = val; } else{ ll mid = (l&#43;r) / 2; if(t &lt;= mid){ update(l, mid, 2*v, t, val); seg[v] = seg[2*v] &#43; seg[2*v &#43; 1]; } else{ update(mid&#43;1, r, 2*v&#43;1, t, val); seg[v] = seg[2*v] &#43; seg[2*v &#43; 1]; } } } ll query(ll l, ll r, ll ql, ll qr, ll v){ if(qr &lt; l || ql &gt; r){ return 0; } if(ql &lt;= l &amp;&amp; qr &gt;= r){ return seg[v]; } ll mid = (l&#43;r)/2; return query(l, mid, ql, qr, 2*v) &#43; query(mid&#43;1, r, ql, qr, 2*v&#43;1); } int main(){ ios_base::sync_with_stdio(0); cin....</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-07-11 22:52:29 +0900 KST'>July 11, 2024</span></footer>
+  <a class="entry-link" aria-label="post link to 백준 2042: 구간 합 구하기" href="http://localhost:1313/computer-science/boj/2042/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">
+      <a href="http://localhost:1313/computer-science/data-structure/segment-tree/">[자료구조] 세그먼트 트리 (Segment Tree)</a>
       <span class="entry-hint" title="Draft">
         <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
           <path
@@ -137,13 +156,13 @@
     <p></p>
   </div>
   <footer class="entry-footer"><span title='2024-07-11 15:30:08 +0900 KST'>July 11, 2024</span></footer>
-  <a class="entry-link" aria-label="post link to [자료구조] 세그먼트 트리 (Segment Tree)" href="http://localhost:1313/computer-science/segment-tree/"></a>
+  <a class="entry-link" aria-label="post link to [자료구조] 세그먼트 트리 (Segment Tree)" href="http://localhost:1313/computer-science/data-structure/segment-tree/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
     <h2 class="entry-hint-parent">
-      <a href="http://localhost:1313/computer-science/mst/">MST (최소신장트리), Kruskal, Prim</a>
+      <a href="http://localhost:1313/computer-science/algorithm/mst/">MST (최소신장트리), Kruskal, Prim</a>
     </h2>
   </header>
   <div class="entry-content">
@@ -152,20 +171,20 @@ n개의 정점을 가지는 그래프라면 n-1개의 간선이 사용됨 사이
 MST 구하는 알고리즘 Kruskal 사이클을 만들지 않는 선택에 한해서 가장 작은 가중치를 가지는 선을 선택해나가는 알고리즘...</p>
   </div>
   <footer class="entry-footer"><span title='2024-07-07 03:20:18 +0900 KST'>July 7, 2024</span></footer>
-  <a class="entry-link" aria-label="post link to MST (최소신장트리), Kruskal, Prim" href="http://localhost:1313/computer-science/mst/"></a>
+  <a class="entry-link" aria-label="post link to MST (최소신장트리), Kruskal, Prim" href="http://localhost:1313/computer-science/algorithm/mst/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
     <h2 class="entry-hint-parent">
-      <a href="http://localhost:1313/computer-science/union-find/">Union Find (C&#43;&#43;)</a>
+      <a href="http://localhost:1313/computer-science/algorithm/union-find/">Union Find (C&#43;&#43;)</a>
     </h2>
   </header>
   <div class="entry-content">
     <p>Union Find Union Find: 그래프에서 두 노드가 같은 집합에 속하는지 판별하는 알고리즘 노드를 합치는 union 연산 노드가 같은 집합인지 판별하는 find 연산 구조 unionfind[i]: i번 노드의 부모 노드 정보를 담는다. unify(x, y): x번 노드와 y번 노드를 합친다. 이때 unify 이후 둘은 같은 부모 노드를 가리키게 된다. same(x, y): x번 노드와 y번 노드가 같은 집합에 있는 지 반환한다. find(x): x번 노드의 부모 노드 정보를 반환한다. 이때 unionfind[x]를 단순히 반환하는 것이 아닌, unionfind[x]를 업데이트하는 과정을 거침 재귀함수를 통해 구현하여 찾음과 동시에 부모 노드가 업데이트되도록 함 전체 코드 #include &lt;iostream&gt; #define MAX 100 using namespace std; using ll = long long; ll unionfind[MAX]; ll find(ll x){ if(unionfind[x]==x){ return x; } return unionfind[x]=find(unionfind[x]); } void unify(ll x, ll y){ ll n1=find(x), n2=find(y); if(n1&lt;n2){ unionfind[n2]=n1; } else{ unionfind[n1]=n2; } } bool same(ll x, ll y){ return (find(x)==find(y)); } int main(){ } </p>
   </div>
   <footer class="entry-footer"><span title='2024-07-07 02:49:18 +0900 KST'>July 7, 2024</span></footer>
-  <a class="entry-link" aria-label="post link to Union Find (C&#43;&#43;)" href="http://localhost:1313/computer-science/union-find/"></a>
+  <a class="entry-link" aria-label="post link to Union Find (C&#43;&#43;)" href="http://localhost:1313/computer-science/algorithm/union-find/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
