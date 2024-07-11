@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Data Structure on @nimeajku</title>
+    <link>https://clairekiu.github.io/tags/data-structure/</link>
+    <description>Recent content in Data Structure on @nimeajku</description>
+    <generator>Hugo -- 0.128.2</generator>
+    <language>kr-ko</language>
+    <lastBuildDate>Sun, 07 Jul 2024 03:20:18 +0900</lastBuildDate>
+    <atom:link href="https://clairekiu.github.io/tags/data-structure/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MST (최소신장트리), Kruskal, Prim</title>
+      <link>https://clairekiu.github.io/computer-science/mst/</link>
+      <pubDate>Sun, 07 Jul 2024 03:20:18 +0900</pubDate>
+      <guid>https://clairekiu.github.io/computer-science/mst/</guid>
+      <description>Minimum Spanning Tree 신장 트리 (Spanning Tree) 무방향 그래프 G(V, E)에서 모든 정점 V를 간선 E 중 가장 적은 갯수로 사용하여 이은 부분 그래프
+n개의 정점을 가지는 그래프라면 n-1개의 간선이 사용됨 사이클을 이루지 않음 최소 신장 트리 (Minimum Spanning Tree) G(V, E)에서 간선에 가중치가 주어진 경우 선택된 간선의 가중치의 합이 최소가 되는 신장 트리
+MST 구하는 알고리즘 Kruskal 사이클을 만들지 않는 선택에 한해서 가장 작은 가중치를 가지는 선을 선택해나가는 알고리즘</description>
+    </item>
+  </channel>
+</rss>

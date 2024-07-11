@@ -10,9 +10,9 @@
     <atom:link href="https://clairekiu.github.io/tags/visualization/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>군속도 (Group Velocity) 시각화</title>
-      <link>https://clairekiu.github.io/post/group-velocity/</link>
+      <link>https://clairekiu.github.io/physics/group-velocity/</link>
       <pubDate>Fri, 05 Jul 2024 00:58:44 +0900</pubDate>
-      <guid>https://clairekiu.github.io/post/group-velocity/</guid>
+      <guid>https://clairekiu.github.io/physics/group-velocity/</guid>
       <description> 군속도 시각화 파수와 각진동수가 미세하게 다른 5개의 파동 중첩 시각화 검은색의 5개 파동이 중첩되지 않은 원본이다. 5개의 원본 파동을 합친 파동을 붉은색으로 표시했다. 합성된 파동의 외피가 느린 속도로 진행함을 확인할 수 있다. 구현 방법 Processing으로 구현 후 p5.js로 변환했다. p5js.org에 업로드 후 임베드했다. </description>
     </item>
   </channel>
