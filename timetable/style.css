@@ -1,0 +1,46 @@
+/* style.css */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+}
+
+#timetable {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 5px;
+    margin-top: 20px;
+}
+
+.cell {
+    border: 1px solid #ddd;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.header {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+input, select, button {
+    padding: 10px;
+    font-size: 16px;
+    margin: 10px;
+}
+
+button {
+    cursor: pointer;
+}
+
+#quoteButton {
+    display: block;
+    margin: 20px auto;
+}
+
+#quoteDisplay {
+    font-style: italic;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 600px;
+}

@@ -1,0 +1,30 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TimeTable Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>TimeTable Generator</h1>
+    <select id="semesterSelect">
+        <option value="" disabled selected>Select Semester</option>
+        <option value="1-1">1학년 1학기</option>
+        <option value="1-2">1학년 2학기</option>
+        <option value="2-1">2학년 1학기</option>
+        <option value="2-2">2학년 2학기</option>
+        <option value="3-1">3학년 1학기</option>
+        <option value="3-2">3학년 2학기</option>
+    </select>
+    <button id="quoteButton">Get Random Quote</button>
+    <p id="quoteDisplay"></p>
+    <div id="timetableContainer" style="display: none;">
+        <input type="text" id="subjectInput" placeholder="Enter Subject" />
+        <button id="clearButton">Clear Timetable</button>
+        <div id="timetable"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
