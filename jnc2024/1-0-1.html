@@ -29,7 +29,7 @@
 <body>
     <h1>수랑사랑 재능나눔체험전 2024</h1>
     <canvas id="canvas" width="600" height="600"></canvas>
-    <div id="info">Divided Areas: 1</div>
+    <div id="info">분할된 평면의 수: 1</div>
     <button id="resetBtn">분할 초기화</button>
 
     <script>
@@ -167,7 +167,7 @@
         resetBtn.addEventListener('click', () => {
             lines = [];
             dividedAreas = 1;
-            info.textContent = `Divided Areas: ${dividedAreas}`;
+            info.textContent = `분할된 평면의 수: ${dividedAreas}`;
             drawCircle();
         });
 
