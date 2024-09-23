@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Circle Division with Lines</title>
+    <title>Circle Division with Correct Line Count</title>
     <style>
         body, html {
             margin: 0;
@@ -102,10 +102,9 @@
             });
         }
 
-        // 평면 분할 개수 계산: 직선을 더할 때마다 1씩 추가
-        function updateDividedAreas() {
-            dividedAreas = lines.length + 1;
-            info.textContent = `Divided Areas: ${dividedAreas}`;
+        // 평면 분할 개수 계산: 직선을 더할 때마다 최대 분할 개수 계산
+        function calculateDividedAreas(n) {
+            return (n * (n + 1)) / 2 + 1; // 최대 교차 분할 공식을 적용
         }
 
         // 마우스 이벤트
@@ -134,8 +133,9 @@
                 endY: e.offsetY
             });
 
-            // 직선이 추가될 때마다 분할 개수 업데이트
-            updateDividedAreas();
+            // 직선이 추가될 때마다 최대 분할 개수 업데이트
+            dividedAreas = calculateDividedAreas(lines.length);
+            info.textContent = `Divided Areas: ${dividedAreas}`;
         });
 
         // 초기화 버튼 기능

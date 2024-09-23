@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수랑사랑 재능나눔체험전 2024</title>
+    <title>Circle Division with Infinite Lines and Area Count</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        canvas {
+            border: 1px solid black;
+            background-color: white;
+        }
+        #info {
+            margin: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>수랑사랑 재능나눔체험전 2024</h1>
+    <canvas id="canvas" width="600" height="600"></canvas>
+    <div id="info">Divided Areas: 1</div>
+    <button id="resetBtn">분할 초기화</button>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const resetBtn = document.getElementById('resetBtn');
+        const info = document.getElementById('info');
+
+        let drawing = false;
+        let startX, startY;
+        let lines = []; // 직선 데이터를 저장할 배열
+        let dividedAreas = 1; // 초기에 영역은 1개
+
+        // 원의 중심 및 반지름
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        const radius = 200;
+
+        // 원 그리기 함수
+        function drawCircle() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);  // 캔버스 초기화
+
+            // 원 그리기
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+            ctx.strokeStyle = 'black';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        }
+
+        // 직선 그릴 좌표 계산 (캔버스 경계와 교차)
+        function calculateLineCoordinates(x1, y1, x2, y2) {
+            const slope = (y2 - y1) / (x2 - x1);
+            const intercept = y1 - slope * x1;
+
+            const points = [];
+
+            points.push({ x: 0, y: intercept });
+            points.push({ x: canvas.width, y: slope * canvas.width + intercept });
+
+            return points;
+        }
+
+        // 직선 그리기 (캔버스 경계로 확장)
+        function drawInfiniteLine(x1, y1, x2, y2) {
+            const points = calculateLineCoordinates(x1, y1, x2, y2);
+
+            ctx.beginPath();
+            ctx.moveTo(points[0].x, points[0].y);
+            ctx.lineTo(points[1].x, points[1].y);
+            ctx.strokeStyle = 'red';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        }
+
+        // 교차점 계산 (선분끼리)
+        function calculateIntersection(l1, l2) {
+            const a1 = l1.endY - l1.startY;
+            const b1 = l1.startX - l1.endX;
+            const c1 = a1 * l1.startX + b1 * l1.startY;
+
+            const a2 = l2.endY - l2.startY;
+            const b2 = l2.startX - l2.endX;
+            const c2 = a2 * l2.startX + b2 * l2.startY;
+
+            const determinant = a1 * b2 - a2 * b1;
+
+            if (determinant === 0) {
+                // 평행함 (교차 없음)
+                return null;
+            } else {
+                const x = (b2 * c1 - b1 * c2) / determinant;
+                const y = (a1 * c2 - a2 * c1) / determinant;
+
+                // 교차점이 원 내부에 있는지 확인
+                if (distance(x, y, centerX, centerY) <= radius) {
+                    return { x, y };
+                }
+                return null;
+            }
+        }
+
+        // 두 점 사이 거리 계산
+        function distance(x1, y1, x2, y2) {
+            return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+        }
+
+        // 평면 분할 개수 업데이트 (원 내부에서만)
+        function updateDividedAreas() {
+            let intersections = 0;
+
+            // 모든 직선의 교차 여부 확인
+            for (let i = 0; i < lines.length; i++) {
+                for (let j = i + 1; j < lines.length; j++) {
+                    const intersection = calculateIntersection(lines[i], lines[j]);
+                    if (intersection) {
+                        intersections++;
+                    }
+                }
+            }
+
+            dividedAreas = intersections + lines.length + 1;
+            info.textContent = `분할된 평면의 수: ${dividedAreas}`;
+        }
+
+        // 마우스 이벤트
+        canvas.addEventListener('mousedown', (e) => {
+            drawing = true;
+            startX = e.offsetX;
+            startY = e.offsetY;
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (!drawing) return;
+            drawCircle();
+            redrawLines();
+            drawInfiniteLine(startX, startY, e.offsetX, e.offsetY);
+        });
+
+        canvas.addEventListener('mouseup', (e) => {
+            if (!drawing) return;
+            drawing = false;
+
+            lines.push({
+                startX: startX,
+                startY: startY,
+                endX: e.offsetX,
+                endY: e.offsetY
+            });
+
+            updateDividedAreas();
+        });
+
+        // 초기화 버튼
+        resetBtn.addEventListener('click', () => {
+            lines = [];
+            dividedAreas = 1;
+            info.textContent = `Divided Areas: ${dividedAreas}`;
+            drawCircle();
+        });
+
+        // 직선 다시 그리기
+        function redrawLines() {
+            lines.forEach(line => {
+                drawInfiniteLine(line.startX, line.startY, line.endX, line.endY);
+            });
+        }
+
+        // 초기 원 그리기
+        drawCircle();
+    </script>
+
+</body>
+</html>
