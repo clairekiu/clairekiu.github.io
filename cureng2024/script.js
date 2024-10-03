@@ -58,9 +58,9 @@ function displayQuestions(jsonData) {
         const inputField = document.getElementById(`input${index}`);
 
         // 사용자가 입력할 때 정답 확인
+        const correctAnswer = inputField.getAttribute('data-answer');
         inputField.addEventListener("input", function () {
             const userInput = inputField.value.trim();
-            const correctAnswer = inputField.getAttribute('data-answer');
 
             if (userInput === correctAnswer) {
                 feedback.innerHTML = `Correct! <br> Meaning: ${item.meaning}`;
@@ -76,7 +76,7 @@ function displayQuestions(jsonData) {
         // "Show Answer" 버튼 클릭 시 정답 표시
         showAnswerBtn.addEventListener("click", function () {
             if (showAnswerBtn.innerText === "Show Answer") {
-                feedback.innerHTML = `Correct answer: ${item.word} <br> Meaning: ${item.meaning}`;
+                feedback.innerHTML = `Correct answer: ${correctAnswer} <br> Meaning: ${item.meaning}`;
                 feedback.style.color = "blue";
                 showAnswerBtn.innerText = "Close Answer";
 
