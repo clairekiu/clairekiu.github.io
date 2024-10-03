@@ -21,6 +21,7 @@ function reviewQuestions() {
     const questionsContainer = document.getElementById("questions");
     questionsContainer.innerHTML = ''; // 기존 질문 삭제
     displayQuestions(reviewedWords);   // 틀린 단어만 표시
+    reviewedWords = [];
 }
 
 // 문제를 셔플하는 함수
