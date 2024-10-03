@@ -1,0 +1,27 @@
+[
+    {
+        "word": "apple",
+        "meaning": "사과",
+        "sentence": "She ate an {apple} for lunch."
+    },
+    {
+        "word": "banana",
+        "meaning": "바나나",
+        "sentence": "He likes to eat {banana} in the morning."
+    },
+    {
+        "word": "car",
+        "meaning": "자동차",
+        "sentence": "She drove a {car} to work."
+    },
+    {
+        "word": "dog",
+        "meaning": "개",
+        "sentence": "The {dog} is barking loudly."
+    },
+    {
+        "word": "book",
+        "meaning": "책",
+        "sentence": "I am reading a {book} about history."
+    }
+]
