@@ -9,6 +9,20 @@ function loadJSON() {
         .catch(error => console.error('Error loading JSON:', error));
 }
 
+let reviewedWords = [];
+
+// 틀린 단어(정답을 확인한 단어)만 다시 학습하는 함수
+function reviewQuestions() {
+    if (reviewedWords.length === 0) {
+        alert("There are no incorrect words to review.");
+        return;
+    }
+
+    const questionsContainer = document.getElementById("questions");
+    questionsContainer.innerHTML = ''; // 기존 질문 삭제
+    displayQuestions(reviewedWords);   // 틀린 단어만 표시
+}
+
 // 문제를 셔플하는 함수
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -40,7 +54,7 @@ function displayQuestions(jsonData) {
         // 질문을 담을 div 요소 생성
         const questionDiv = document.createElement("div");
         questionDiv.className = "question";
-        questionDiv.innerHTML = `${sentenceWithInput} <br><br>`; // 문장과 버튼 사이에 간격 추가
+        questionDiv.innerHTML = `${sentenceWithInput} <br>`; // 문장과 버튼 사이에 간격 추가
         questionsContainer.appendChild(questionDiv);
 
         // "Show Answer" 버튼 생성
@@ -83,6 +97,11 @@ function displayQuestions(jsonData) {
                 // Close Answer 버튼 스타일 적용
                 showAnswerBtn.style.backgroundColor = "#ADD8E6";
                 showAnswerBtn.style.color = "#000";
+
+                // 틀린 단어(정답 확인한 단어)를 reviewedWords 배열에 추가
+                if (!reviewedWords.some(wordItem => wordItem.word === item.word && wordItem.sentence === item.sentence)) {
+                    reviewedWords.push(item);
+                }
 
             } else {
                 feedback.innerHTML = ""; // 정답 숨기기

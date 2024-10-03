@@ -73,6 +73,16 @@ input[type="text"] {
     margin-top: 10px;
 }
 
+.review-answer-btn {
+    background-color: #edffeb;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
 .show-answer-btn:hover {
     background-color: #e6e6e6;
 }
