@@ -96,6 +96,21 @@ function displayQuestions(jsonData) {
     });
 }
 
+// 검색 기능을 구현하는 함수
+function filterWordList() {
+    const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+    const wordItems = document.querySelectorAll(".word-item");
+    
+    wordItems.forEach(item => {
+        const word = item.querySelector("strong").innerText.toLowerCase();
+        if (word.includes(searchTerm)) {
+            item.style.display = "";
+        } else {
+            item.style.display = "none";
+        }
+    });
+}
+
 // 단어 목록을 표시하는 함수 (Word List 탭 - 셔플 안 함)
 function displayWordList(jsonData) {
     const wordListContainer = document.getElementById("wordListContainer");
@@ -136,6 +151,9 @@ function displayWordList(jsonData) {
         `;
         wordListContainer.appendChild(wordDiv);
     });
+
+    // 검색어가 입력될 때마다 필터링 동작
+    document.getElementById("searchInput").addEventListener("input", filterWordList);
 }
 
 // 탭 전환 기능
