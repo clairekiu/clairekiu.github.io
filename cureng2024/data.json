@@ -2,6 +2,11 @@
     {
         "word": "aboriginal",
         "meaning": "원생의, 토착민의, 원주민",
+        "sentence": "The land is owned by the {aboriginal} people that have lived there for centuries."
+    },
+    {
+        "word": "aboriginal",
+        "meaning": "원생의, 토착민의, 원주민",
         "sentence": "The {aboriginal} tribes of Australia have preserved their traditions for thousands of years."
     },
     {
