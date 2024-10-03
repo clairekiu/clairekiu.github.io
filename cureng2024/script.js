@@ -18,8 +18,11 @@ function shuffleArray(array) {
 }
 
 // 중괄호로 감싸진 부분을 찾아서 빈칸을 만듦
-function replaceBracesWithInput(sentence, index, correctWord) {
-    return sentence.replace(/{(.*?)}/, `<input type="text" id="input${index}" size="${correctWord.length}" />`);
+function replaceBracesWithInput(sentence, index) {
+    return sentence.replace(/{(.*?)}/g, function(match, p1) {
+        // 빈칸 처리: 중괄호 안의 단어 길이에 맞춰 input의 size 지정
+        return `<input type="text" id="input${index}" size="${p1.length}" data-answer="${p1}" />`;
+    });
 }
 
 // 질문을 표시하는 함수
@@ -28,23 +31,40 @@ function displayQuestions(jsonData) {
     const questionsContainer = document.getElementById("questions");
 
     shuffledData.forEach((item, index) => {
-        const { sentence } = item;
-        const correctWord = sentence.match(/{(.*?)}/)[1]; // 중괄호 안에 있는 정답 단어 추출
-        const sentenceWithInput = replaceBracesWithInput(sentence, index, correctWord);
+        const sentence = item.sentence;
 
+        // 중괄호로 감싸진 단어를 빈칸으로 변환
+        const sentenceWithInput = replaceBracesWithInput(sentence, index);
+
+        // 질문을 담을 div 요소 생성
         const questionDiv = document.createElement("div");
         questionDiv.className = "question";
         questionDiv.innerHTML = `${sentenceWithInput}`;
         questionsContainer.appendChild(questionDiv);
 
+        // 입력 필드와 정답 확인을 위한 이벤트 추가
         const inputField = document.getElementById(`input${index}`);
         const feedback = document.createElement("div");
         feedback.className = "feedback";
         questionDiv.appendChild(feedback);
 
-        inputField.addEventListener("input", function() {
+        // "Show Answer" 버튼 추가
+        const showAnswerButton = document.createElement("button");
+        showAnswerButton.textContent = "Show Answer";
+        questionDiv.appendChild(showAnswerButton);
+
+        // "Show Answer" 버튼 클릭 시 정답 표시
+        showAnswerButton.addEventListener("click", function () {
+            feedback.innerHTML = `Answer: ${inputField.getAttribute('data-answer')}, Meaning: ${item.meaning}`;
+            feedback.style.color = "blue";
+        });
+
+        // 입력 시 정답 여부 확인
+        inputField.addEventListener("input", function () {
             const userInput = inputField.value.trim();
-            if (userInput === correctWord) {
+            const correctAnswer = inputField.getAttribute('data-answer');
+
+            if (userInput === correctAnswer) {
                 feedback.innerHTML = `Correct! Meaning: ${item.meaning}`;
                 feedback.style.color = "green";
             } else if (userInput !== "") {

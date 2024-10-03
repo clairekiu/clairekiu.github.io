@@ -12,11 +12,15 @@ h1 {
 
 .question {
     margin: 20px 0;
-    font-size: 1.2rem;
+    padding: 15px;
+    font-size: 1.0rem;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
 }
 
 input {
-    font-size: 1.2rem;
+    font-size: 1.0rem;
     padding: 5px;
     width: auto;
     min-width: 100px;
@@ -25,4 +29,19 @@ input {
 .feedback {
     margin-top: 10px;
     font-weight: bold;
+}
+
+/* Show Answer 버튼 스타일 수정 */
+button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #f5f5dc; /* 베이지색 배경 */
+    color: black; /* 검은색 글씨 */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #e5e5c5; /* 살짝 어두운 베이지색으로 hover 효과 */
 }
