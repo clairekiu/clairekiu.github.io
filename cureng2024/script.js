@@ -40,7 +40,7 @@ function displayQuestions(jsonData) {
         // 질문을 담을 div 요소 생성
         const questionDiv = document.createElement("div");
         questionDiv.className = "question";
-        questionDiv.innerHTML = `${sentenceWithInput}`;
+        questionDiv.innerHTML = `${sentenceWithInput} <br><br>`; // 문장과 버튼 사이에 간격 추가
         questionsContainer.appendChild(questionDiv);
 
         // "Show Answer" 버튼 생성
@@ -56,14 +56,14 @@ function displayQuestions(jsonData) {
 
         // 입력 필드와 정답 확인을 위한 이벤트 추가
         const inputField = document.getElementById(`input${index}`);
-        const correctAnswer = inputField.getAttribute('data-answer');
 
         // 사용자가 입력할 때 정답 확인
         inputField.addEventListener("input", function () {
             const userInput = inputField.value.trim();
+            const correctAnswer = inputField.getAttribute('data-answer');
 
             if (userInput === correctAnswer) {
-                feedback.innerHTML = `Correct!<br><span class="spaced">뜻: ${item.meaning}`;
+                feedback.innerHTML = `Correct! <br> Meaning: ${item.meaning}`;
                 feedback.style.color = "green";
             } else if (userInput !== "") {
                 feedback.innerHTML = "Incorrect";
@@ -75,8 +75,23 @@ function displayQuestions(jsonData) {
 
         // "Show Answer" 버튼 클릭 시 정답 표시
         showAnswerBtn.addEventListener("click", function () {
-            feedback.innerHTML = `Correct answer: ${correctAnswer}<br><span class="spaced">뜻: ${item.meaning}`;
-            feedback.style.color = "blue";
+            if (showAnswerBtn.innerText === "Show Answer") {
+                feedback.innerHTML = `Correct answer: ${item.word} <br> Meaning: ${item.meaning}`;
+                feedback.style.color = "blue";
+                showAnswerBtn.innerText = "Close Answer";
+
+                // Close Answer 버튼 스타일 적용
+                showAnswerBtn.style.backgroundColor = "#ADD8E6";
+                showAnswerBtn.style.color = "#000";
+
+            } else {
+                feedback.innerHTML = ""; // 정답 숨기기
+                showAnswerBtn.innerText = "Show Answer";
+
+                // 원래 Show Answer 버튼 스타일로 복귀
+                showAnswerBtn.style.backgroundColor = "";
+                showAnswerBtn.style.color = "";
+            }
         });
     });
 }
