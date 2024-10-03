@@ -2,47 +2,102 @@ body {
     font-family: Arial, sans-serif;
     margin: 20px;
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: #ffffff;
 }
 
 h1 {
     text-align: center;
-    font-size: 2.0rem; /* 제목 크기를 조금 줄임 */
-    margin-top: 40px;  /* 위쪽 간격 */
-    margin-bottom: 40px;  /* 아래쪽 간격 */
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.tab {
+    overflow: hidden;
+    border-bottom: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+    color: #333;
+}
+
+.tab button:hover {
+    background-color: #ddd;
+}
+
+.tab button.active {
+    background-color: #ccc;
+}
+
+.tabcontent {
+    display: none;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
 }
 
 .question {
     margin: 20px 0;
-    padding: 15px;
-    font-size: 1.0rem;
-    background-color: #ffffff;
+    font-size: 1rem;
+    padding: 10px;
+    background-color: #f8f8f8;
     border: 1px solid #ddd;
     border-radius: 8px;
+    color: #333;
 }
 
-input {
-    font-size: 1.0rem;
+input[type="text"] {
+    font-size: 1rem;
     padding: 5px;
     width: auto;
     min-width: 100px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.show-answer-btn {
+    background-color: #ffebee;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.show-answer-btn:hover {
+    background-color: #e6e6e6;
 }
 
 .feedback {
     margin-top: 10px;
     font-weight: bold;
+    color: red;
 }
 
-button {
-    margin-top: 10px;
-    padding: 5px 10px;
-    background-color: #f5f5dc;
-    color: black;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    cursor: pointer;
+.word-item {
+    margin-bottom: 20px; /* 단어 목록 간의 간격 */
+    line-height: 1.6;    /* 줄 간격 조정 */
 }
 
-button:hover {
-    background-color: #e5e5c5;
+ul {
+    padding-left: 20px;  /* 예문 목록 들여쓰기 */
+    margin-top: 10px;    /* 예문 목록과 단어 사이 간격 */
+}
+
+li {
+    margin-bottom: 5px;  /* 각 예문 간의 간격 */
+}
+
+.spaced {
+    display: block;
+    margin-top: 10px; /* 간격을 조정 */
 }

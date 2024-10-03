@@ -3,15 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>시사영어 Vocabulary</title>
+    <title>Vocabulary Practice</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h1>시사영어 시험범위 (79)</h1>
-    <div id="questions"></div>
+    <h1>Vocabulary Practice</h1>
 
-    <script src="script.js"></script> <!-- script.js 파일을 불러옴 -->
+    <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'WordList')">Word List</button>
+        <button class="tablinks" onclick="openTab(event, 'Test')">Test</button>
+    </div>
+
+    <!-- Word List tab -->
+    <div id="WordList" class="tabcontent">
+        <h2>Word List</h2>
+        <div id="wordListContainer"></div>
+    </div>
+
+    <!-- Test tab -->
+    <div id="Test" class="tabcontent">
+        <div id="questions"></div>
+    </div>
+
+    <script src="script.js"></script>
 
 </body>
 </html>

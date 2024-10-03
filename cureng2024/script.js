@@ -3,7 +3,8 @@ function loadJSON() {
     fetch('data.json')
         .then(response => response.json())
         .then(data => {
-            displayQuestions(data);
+            displayWordList(data);   // Word List는 셔플 없이 로드
+            displayQuestions(shuffleArray([...data]));  // Test 탭 데이터는 셔플 후 로드
         })
         .catch(error => console.error('Error loading JSON:', error));
 }
@@ -25,7 +26,7 @@ function replaceBracesWithInput(sentence, index) {
     });
 }
 
-// 질문을 표시하는 함수
+// 질문을 표시하는 함수 (Test 탭)
 function displayQuestions(jsonData) {
     const shuffledData = shuffleArray(jsonData);
     const questionsContainer = document.getElementById("questions");
@@ -42,30 +43,27 @@ function displayQuestions(jsonData) {
         questionDiv.innerHTML = `${sentenceWithInput}`;
         questionsContainer.appendChild(questionDiv);
 
-        // 입력 필드와 정답 확인을 위한 이벤트 추가
-        const inputField = document.getElementById(`input${index}`);
+        // "Show Answer" 버튼 생성
+        const showAnswerBtn = document.createElement("button");
+        showAnswerBtn.className = "show-answer-btn";
+        showAnswerBtn.innerText = "Show Answer";
+        questionDiv.appendChild(showAnswerBtn);
+
+        // 피드백 div
         const feedback = document.createElement("div");
         feedback.className = "feedback";
         questionDiv.appendChild(feedback);
 
-        // "Show Answer" 버튼 추가
-        const showAnswerButton = document.createElement("button");
-        showAnswerButton.textContent = "Show Answer";
-        questionDiv.appendChild(showAnswerButton);
+        // 입력 필드와 정답 확인을 위한 이벤트 추가
+        const inputField = document.getElementById(`input${index}`);
+        const correctAnswer = inputField.getAttribute('data-answer');
 
-        // "Show Answer" 버튼 클릭 시 정답 표시
-        showAnswerButton.addEventListener("click", function () {
-            feedback.innerHTML = `Answer: ${inputField.getAttribute('data-answer')}, Meaning: ${item.meaning}`;
-            feedback.style.color = "blue";
-        });
-
-        // 입력 시 정답 여부 확인
+        // 사용자가 입력할 때 정답 확인
         inputField.addEventListener("input", function () {
             const userInput = inputField.value.trim();
-            const correctAnswer = inputField.getAttribute('data-answer');
 
             if (userInput === correctAnswer) {
-                feedback.innerHTML = `Correct! Meaning: ${item.meaning}`;
+                feedback.innerHTML = `Correct!<br><span class="spaced">뜻: ${item.meaning}`;
                 feedback.style.color = "green";
             } else if (userInput !== "") {
                 feedback.innerHTML = "Incorrect";
@@ -74,8 +72,78 @@ function displayQuestions(jsonData) {
                 feedback.innerHTML = "";
             }
         });
+
+        // "Show Answer" 버튼 클릭 시 정답 표시
+        showAnswerBtn.addEventListener("click", function () {
+            feedback.innerHTML = `Correct answer: ${correctAnswer}<br><span class="spaced">뜻: ${item.meaning}`;
+            feedback.style.color = "blue";
+        });
     });
 }
 
-// 페이지 로드 시 JSON 파일 로드
-window.onload = loadJSON;
+// 단어 목록을 표시하는 함수 (Word List 탭 - 셔플 안 함)
+function displayWordList(jsonData) {
+    const wordListContainer = document.getElementById("wordListContainer");
+
+    // 단어와 뜻을 기준으로 예문을 병합할 객체 생성
+    const wordMap = {};
+
+    // 단어를 순서대로 병합
+    jsonData.forEach((item) => {
+        const key = item.word + "|" + item.meaning;  // 단어와 뜻을 키로 사용
+
+        // 이미 해당 단어가 존재하면 예문 추가, 없으면 새로 생성
+        if (wordMap[key]) {
+            wordMap[key].sentences.push(item.sentence);
+        } else {
+            wordMap[key] = {
+                word: item.word,
+                meaning: item.meaning,
+                sentences: [item.sentence]
+            };
+        }
+    });
+
+    // 병합된 단어 목록을 Word List에 표시
+    Object.values(wordMap).forEach((item) => {
+        const wordDiv = document.createElement("div");
+        wordDiv.className = "word-item";
+
+        // 중괄호로 감싸진 부분을 볼드체로 변환
+        const formattedSentences = item.sentences.map(sentence => {
+            return `<li>${sentence.replace(/{(.*?)}/g, '<strong>$1</strong>')}</li>`;
+        }).join("");
+
+        wordDiv.innerHTML = `
+            <strong>${item.word}</strong>: ${item.meaning}
+            <br/>
+            <ul>${formattedSentences}</ul>
+        `;
+        wordListContainer.appendChild(wordDiv);
+    });
+}
+
+// 탭 전환 기능
+function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+// 페이지 로드 시 Word List 탭을 기본으로 열기
+window.onload = function() {
+    loadJSON();
+    document.getElementById("WordList").style.display = "block"; // Word List 탭을 기본으로 열기
+    document.getElementsByClassName("tablinks")[0].className += " active"; // Word List 탭 버튼 활성화
+};
