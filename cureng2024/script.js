@@ -11,16 +11,16 @@ function loadJSON() {
 
 let reviewedWords = [];
 
-// 틀린 단어만 다시 학습하는 함수
-function reviewIncorrectWords() {
-    reviewedWords = [];
-    const incorrectWords = jsonData.filter(item => reviewedWords.includes(item.word));
-
-    if (incorrectWords.length > 0) {
-        displayQuestionsByPage(incorrectWords, 1); // 틀린 단어만 페이지로 나눠서 표시
-    } else {
-        alert("학습할 단어가 없습니다 ㅎㅎ!");
+// 틀린 단어(정답을 확인한 단어)만 다시 학습하는 함수
+function reviewQuestions() {
+    if (reviewedWords.length === 0) {
+        alert("There are no incorrect words to review.");
+        return;
     }
+
+    const questionsContainer = document.getElementById("questions");
+    questionsContainer.innerHTML = ''; // 기존 질문 삭제
+    displayQuestions(reviewedWords);   // 틀린 단어만 표시
 }
 
 // 문제를 셔플하는 함수
