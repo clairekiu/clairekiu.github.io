@@ -9,7 +9,29 @@ function loadJSON() {
         .catch(error => console.error('Error loading JSON:', error));
 }
 
+let correctWords = [];
 let reviewedWords = [];
+
+// 맞은 단어 제외한 문제를 다시 학습하는 함수
+function reviewQuestionsWithoutCorrect() {
+    const incorrectWords = jsonData.filter(item => !correctWords.some(wordItem => wordItem.word === item.word));
+
+    if (incorrectWords.length === 0) {
+        alert("All words are correct. No words to review.");
+        return;
+    }
+
+    const questionsContainer = document.getElementById("questions");
+    questionsContainer.innerHTML = ''; // 기존 질문 삭제
+    displayQuestions(incorrectWords);   // 맞은 단어 제외한 단어만 표시
+}
+
+// 버튼 추가 (맞은 단어 제외)
+const reviewWithoutCorrectBtn = document.createElement("button");
+reviewWithoutCorrectBtn.className = "review-answer-btn";
+reviewWithoutCorrectBtn.innerText = "맞은 단어 제외";
+reviewWithoutCorrectBtn.onclick = reviewQuestionsWithoutCorrect;
+document.getElementById("Test").appendChild(reviewWithoutCorrectBtn);
 
 // 틀린 단어(정답을 확인한 단어)만 다시 학습하는 함수
 function reviewQuestions() {
@@ -80,6 +102,9 @@ function displayQuestions(jsonData) {
             if (userInput === correctAnswer) {
                 feedback.innerHTML = `Correct! <br> Meaning: ${item.meaning}`;
                 feedback.style.color = "green";
+                if (!correctWords.some(wordItem => wordItem.word === item.word && wordItem.sentence === item.sentence)) {
+                    correctWords.push(item);
+                }
             } else if (userInput !== "") {
                 feedback.innerHTML = "Incorrect";
                 feedback.style.color = "red";
