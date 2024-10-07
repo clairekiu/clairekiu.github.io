@@ -1,16 +1,18 @@
+let jsonData = [];
+let correctWords = [];
+let reviewedWords = [];
+
 // JSON 파일을 fetch로 불러오기
 function loadJSON() {
     fetch('data.json')
         .then(response => response.json())
         .then(data => {
+            jsonData = data;  // 데이터를 전역 변수에 저장
             displayWordList(data);   // Word List는 셔플 없이 로드
             displayQuestions(shuffleArray([...data]));  // Test 탭 데이터는 셔플 후 로드
         })
         .catch(error => console.error('Error loading JSON:', error));
 }
-
-let correctWords = [];
-let reviewedWords = [];
 
 // 맞은 단어 제외한 문제를 다시 학습하는 함수
 function reviewQuestionsWithoutCorrect() {
@@ -25,13 +27,6 @@ function reviewQuestionsWithoutCorrect() {
     questionsContainer.innerHTML = ''; // 기존 질문 삭제
     displayQuestions(incorrectWords);   // 맞은 단어 제외한 단어만 표시
 }
-
-// 버튼 추가 (맞은 단어 제외)
-const reviewWithoutCorrectBtn = document.createElement("button");
-reviewWithoutCorrectBtn.className = "review-answer-btn";
-reviewWithoutCorrectBtn.innerText = "맞은 단어 제외";
-reviewWithoutCorrectBtn.onclick = reviewQuestionsWithoutCorrect;
-document.getElementById("Test").appendChild(reviewWithoutCorrectBtn);
 
 // 틀린 단어(정답을 확인한 단어)만 다시 학습하는 함수
 function reviewQuestions() {
