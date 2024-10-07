@@ -25,7 +25,7 @@ function reviewQuestionsWithoutCorrect() {
 
     const questionsContainer = document.getElementById("questions");
     questionsContainer.innerHTML = ''; // 기존 질문 삭제
-    displayQuestions(incorrectWords);   // 맞은 단어 제외한 단어만 표시
+    displayQuestions(shuffleArray([...incorrectWords]));   // 맞은 단어 제외한 단어만 표시
 }
 
 // 틀린 단어(정답을 확인한 단어)만 다시 학습하는 함수
