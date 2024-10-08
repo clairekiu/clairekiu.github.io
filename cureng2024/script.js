@@ -16,22 +16,24 @@ function loadJSON() {
 
 // 맞은 단어 제외한 문제를 다시 학습하는 함수
 function reviewQuestionsWithoutCorrect() {
-    const incorrectWords = jsonData.filter(item => !correctWords.some(wordItem => wordItem.word === item.word));
+    const incorrectWords = jsonData.filter(item => 
+        !correctWords.some(correctItem => correctItem.word === item.word && correctItem.sentence === item.sentence)
+    );
 
     if (incorrectWords.length === 0) {
-        alert("All words are correct. No words to review.");
+        alert("모두 맞았습니다. 표시할 단어가 없습니다.");
         return;
     }
 
     const questionsContainer = document.getElementById("questions");
     questionsContainer.innerHTML = ''; // 기존 질문 삭제
-    displayQuestions(shuffleArray([...incorrectWords]));   // 맞은 단어 제외한 단어만 표시
+    displayQuestions(incorrectWords);   // 맞은 단어 제외한 단어만 표시
 }
 
 // 틀린 단어(정답을 확인한 단어)만 다시 학습하는 함수
 function reviewQuestions() {
     if (reviewedWords.length === 0) {
-        alert("There are no incorrect words to review.");
+        alert("틀린 단어가 없습니다. 표시할 단어가 없습니다.");
         return;
     }
 
