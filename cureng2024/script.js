@@ -113,7 +113,7 @@ function displayQuestions(jsonData) {
                     correctWords.push(item);
                 }
             } else if (userInput !== "") {
-                feedback.innerHTML = "Incorrect";
+                feedback.innerHTML = `<span class="feedback">Incorrect`;
                 feedback.style.color = "red";
             } else {
                 feedback.innerHTML = "";
@@ -123,26 +123,18 @@ function displayQuestions(jsonData) {
         // "Show Answer" 버튼 클릭 시 정답 표시
         showAnswerBtn.addEventListener("click", function () {
             if (showAnswerBtn.innerText === "Show Answer") {
-                feedback.innerHTML = `Correct answer: ${correctAnswer} <br> Meaning: ${item.meaning}`;
-                feedback.style.color = "blue";
+                feedback.innerHTML = `<span class="feedback">Correct answer: ${correctAnswer}</span> <br> Meaning: ${item.meaning}`;
                 showAnswerBtn.innerText = "Close Answer";
-
-                // Close Answer 버튼 스타일 적용
-                showAnswerBtn.style.backgroundColor = "#ADD8E6";
-                showAnswerBtn.style.color = "#000";
-
-                // 틀린 단어(정답 확인한 단어)를 reviewedWords 배열에 추가
-                if (!reviewedWords.some(wordItem => wordItem.word === item.word && wordItem.sentence === item.sentence)) {
-                    reviewedWords.push(item);
-                }
-
+        
+                // Close Answer 버튼에 클래스 추가
+                showAnswerBtn.classList.add("close-answer-btn");
+        
             } else {
                 feedback.innerHTML = ""; // 정답 숨기기
                 showAnswerBtn.innerText = "Show Answer";
-
+        
                 // 원래 Show Answer 버튼 스타일로 복귀
-                showAnswerBtn.style.backgroundColor = "";
-                showAnswerBtn.style.color = "";
+                showAnswerBtn.classList.remove("close-answer-btn");
             }
         });
     });
