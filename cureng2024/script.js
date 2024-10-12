@@ -62,8 +62,13 @@ function replaceBracesWithInput(sentence, index) {
 
 // 질문을 표시하는 함수 (Test 탭)
 function displayQuestions(jsonData) {
+    // 셔플된 데이터
     const shuffledData = shuffleArray(jsonData);
     const questionsContainer = document.getElementById("questions");
+
+    // 남은 단어 수 업데이트
+    const remainingWordsCounter = document.getElementById("remainingWords");
+    remainingWordsCounter.textContent = shuffledData.length; // 남은 단어 수를 셔플된 데이터의 길이로 설정
 
     shuffledData.forEach((item, index) => {
         const sentence = item.sentence;
@@ -99,6 +104,11 @@ function displayQuestions(jsonData) {
             if (userInput === correctAnswer) {
                 feedback.innerHTML = `Correct! <br> Meaning: ${item.meaning}`;
                 feedback.style.color = "green";
+
+                // 남은 단어 수 감소
+                const currentCount = parseInt(remainingWordsCounter.textContent, 10);
+                remainingWordsCounter.textContent = currentCount - 1;
+
                 if (!correctWords.some(wordItem => wordItem.word === item.word && wordItem.sentence === item.sentence)) {
                     correctWords.push(item);
                 }

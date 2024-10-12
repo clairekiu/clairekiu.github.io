@@ -111,3 +111,29 @@ li {
     display: block;
     margin-top: 10px; /* 간격을 조정 */
 }
+
+#remainingWords {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #9c677b;
+    color: white; /* 흰색 글씨 */
+    padding: 15px 20px; /* 넉넉한 패딩 */
+    border-radius: 40px; /* 둥근 모서리 */
+    font-size: 1.0rem; /* 글씨 크기 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
+    font-weight: bold; /* 굵은 글씨 */
+    transition: background-color 0.3s ease; /* 배경색 전환 효과 */
+}
+
+#remainingWords:hover {
+    color: black; /* 흰색 글씨 */
+    background-color: #edb2d0; /* 마우스 올렸을 때 배경색 변경 */
+}
+
+.dash-icon {
+    width: 20px;
+    height: 20px;
+    vertical-align: -2px;
+    margin-right: 5px; /* 아이콘과 텍스트 사이에 간격 추가 */
+}
