@@ -213,14 +213,6 @@ li {
         color: white;
     }
 
-    #remainingWords {
-        background-color: #3b3b3b;
-    }
-
-    #remainingWords:hover {
-        background-color: #666;
-    }
-
     ul {
         color: #e0e0e0;
     }
