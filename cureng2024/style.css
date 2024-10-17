@@ -1,11 +1,12 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: Noto Sans KR, sans-serif;
     margin: 20px;
     padding: 20px;
     background-color: #ffffff;
 }
 
 h1 {
+    font-family: Noto Sans KR, sans-serif;
     text-align: center;
     font-size: 2rem;
     margin-bottom: 20px;
@@ -122,23 +123,34 @@ li {
     margin-top: 10px;
 }
 
-#remainingWords {
+/* #remainingWords {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: #9c677b;
-    color: white;
-    padding: 15px 20px; 
-    border-radius: 40px; 
-    font-size: 1.0rem; 
-    font-weight: bold; 
-    transition: background-color 0.3s ease;
-}
-
-#remainingWords:hover {
     color: black;
     background-color: #edb2d0; 
+    padding: 15px 20px; 
+    border-radius: 40px; 
+    font-size: 2.0rem; 
+    transition: background-color 0.3s ease;
+} */
+
+#remainingWords {
+    text-align: center;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #bd81a0; /* 그라데이션 배경 */
+    color: white; /* 흰색 글씨 */
+    padding: 15px 20px; /* 넉넉한 패딩 */
+    border-radius: 30px; /* 둥근 모서리 */
+    font-size: 1.5rem; /* 글씨 크기 */
+    font-weight: bold; /* 굵은 글씨 */
+    transition: all 0.3s ease-in-out; /* 모든 변화에 전환 효과 추가 */
+    text-align: center; /* 글씨 가운데 정렬 */
+    letter-spacing: 1px; /* 글자 간격 조정 */
 }
+
 
 .dash-icon {
     width: 20px;
