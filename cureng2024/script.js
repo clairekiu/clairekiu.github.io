@@ -125,7 +125,11 @@ function displayQuestions(jsonData) {
             if (showAnswerBtn.innerText === "Show Answer") {
                 feedback.innerHTML = `<span class="feedback">Correct answer: ${correctAnswer}</span> <br> Meaning: ${item.meaning}`;
                 showAnswerBtn.innerText = "Close Answer";
-        
+                
+                if (!reviewedWords.some(wordItem => wordItem.word === item.word && wordItem.sentence === item.sentence)) {
+                    reviewedWords.push(item);
+                }
+                
                 // Close Answer 버튼에 클래스 추가
                 showAnswerBtn.classList.add("close-answer-btn");
         
