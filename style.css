@@ -97,21 +97,18 @@ iframe {
 
 .birthday-quiz button {
     padding: 0.5em 1.25em;
-    font-size: 0.95em;
-    font-weight: 600;
-    color: #fff;
-    background: #d81b60;
+    font-size: 0.9em;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    color: #b91c5c;
+    background: transparent;
     border: none;
-    border-radius: 8px;
     cursor: pointer;
+    transition: color 0.2s;
 }
 
 .birthday-quiz button:hover {
-    background: #c2185b;
-}
-
-.birthday-quiz button:active {
-    transform: scale(0.98);
+    color: #8b1645;
 }
 
 .quiz-result {
