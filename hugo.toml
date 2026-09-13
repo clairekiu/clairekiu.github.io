@@ -1,0 +1,11 @@
+baseURL = "https://clairekiu.github.io/"
+locale = "ko-KR"
+title = "clairekiu"
+enableRobotsTXT = true
+
+[params]
+  description = "생각과 작업을 기록하는 공간"
+  author = "clairekiu"
+
+[pagination]
+  pagerSize = 8
