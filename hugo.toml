@@ -20,3 +20,9 @@ enableRobotsTXT = true
   name = "Posts"
   url = "/posts/"
   weight = 10
+
+[[menu.main]]
+  identifier = "vocab"
+  name = "단어 앱"
+  url = "/vocab/"
+  weight = 20
