@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>3D 프린터 예약 현황</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>3D 프린터 예약</h1>
+      <div class="controls">
+        <label>날짜 <input id="date" type="date"></label>
+      </div>
+    </header>
+
+    <p id="status" role="status">예약 정보를 불러오는 중…</p>
+    <section class="schedule" aria-label="3D 프린터 예약 시간표">
+      <div class="time-column" aria-hidden="true">
+        <strong>시간</strong>
+        <div id="times"></div>
+      </div>
+      <div id="printers" class="printers"></div>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
