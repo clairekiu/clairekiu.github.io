@@ -4,31 +4,31 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>창공프린터현황</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <main>
-    <header>
-      <h1>창공프린터 현황</h1>
-      <p>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfoKw3xZp06TX6VfajA8rL-IR5zOOwzoXFaSrcSSksAPSD-Vw/viewform?usp=publish-editor">프린터 1 예약</a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdvF9R9BLNkEm7ZYlEIwQ4jVJrc-AEtBD9GpaPfWQjWYQ5Gyw/viewform?usp=publish-editor">프린터 2 예약</a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeiQEus5JqJHsWFCrtVGaE-vy0ZkPDLS5SPeByzLCpsO6iClg/viewform?usp=publish-editor">프린터 3 예약</a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdVTUlE9Ll4lare73EJkWRhS-D7BR1PItnmZQlSLhOdAHVnJQ/viewform?usp=publish-editor">프린터 4 예약</a>
-      </p>
-      <div class="controls">
-        <label>날짜 <input id="date" type="date"></label>
-      </div>
-    </header>
-
-    <section class="schedule" aria-label="3D 프린터 예약 시간표">
-      <div class="time-column" aria-hidden="true">
-        <strong>시간</strong>
-        <div id="times"></div>
-      </div>
-      <div id="printers" class="printers"></div>
-    </section>
+    <aside class="calendar" aria-label="날짜 선택"><input id="calendar" type="text"></aside>
+    <div class="content">
+      <header>
+        <h1>창공프린터 현황 v1</h1>
+        <p>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfoKw3xZp06TX6VfajA8rL-IR5zOOwzoXFaSrcSSksAPSD-Vw/viewform?usp=publish-editor">프린터 1 예약</a>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSdvF9R9BLNkEm7ZYlEIwQ4jVJrc-AEtBD9GpaPfWQjWYQ5Gyw/viewform?usp=publish-editor">프린터 2 예약</a>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSeiQEus5JqJHsWFCrtVGaE-vy0ZkPDLS5SPeByzLCpsO6iClg/viewform?usp=publish-editor">프린터 3 예약</a>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSdVTUlE9Ll4lare73EJkWRhS-D7BR1PItnmZQlSLhOdAHVnJQ/viewform?usp=publish-editor">프린터 4 예약</a>
+        </p>
+        <label class="date-picker">날짜 <input id="date" type="date"></label>
+      </header>
+      <section class="schedule" aria-label="3D 프린터 예약 시간표">
+        <div class="time-column" aria-hidden="true"><strong>시간</strong><div id="times"></div></div>
+        <div id="printers" class="printers"></div>
+      </section>
+    </div>
   </main>
-  <script src="script.js?v=2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ko.js"></script>
+  <script src="script.js?v=3"></script>
 </body>
 </html>

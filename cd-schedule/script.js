@@ -92,5 +92,6 @@ async function load() {
 
 document.querySelector('#times').innerHTML = Array.from({ length: 15 }, (_, i) => `<span>${String(i + 9).padStart(2, '0')}:00</span>`).join('');
 dateInput.value = dateKey(new Date());
-dateInput.addEventListener('change', load);
+const calendar = flatpickr('#calendar', { inline: true, locale: 'ko', defaultDate: dateInput.value, dateFormat: 'Y-m-d', onChange: (_, value) => { dateInput.value = value; load(); } });
+dateInput.addEventListener('change', () => { calendar.setDate(dateInput.value); load(); });
 load();
