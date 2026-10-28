@@ -15,6 +15,7 @@
 </head>
 <body>
   <h1>P2S 9조 예약</h1>
+  <p><a href="https://docs.google.com/spreadsheets/d/1GXKsIgc7fid99hJcvt9-R6a2oyEkit95HwYUv9HXnF4/edit#gid=886213731">9번 팀 시트 열기</a></p>
   <p id="now"></p>
   <form id="f">
     <label>팀원 <select name="name" required>
@@ -27,12 +28,11 @@
       <label>분 <input name="m" type="number" min="0" max="59" value="0" required></label>
     </div>
     <label>필라멘트 (g) <input name="g" type="number" step="0.01" min="0" required></label>
-    <label>프리뷰 링크 (구글 드라이브) <input name="link" type="url" required></label>
+    <label>프리뷰 스크린샷 <input name="img" type="file" accept="image/*" required></label>
     <label>비밀번호 <input name="pin" type="password" required></label>
     <button>지금부터 예약</button>
   </form>
   <p id="msg"></p>
-  <p><a href="https://docs.google.com/spreadsheets/d/1GXKsIgc7fid99hJcvt9-R6a2oyEkit95HwYUv9HXnF4/edit">시트 보기</a></p>
   <script>
     const API = 'https://script.google.com/macros/s/AKfycbx5HrZqi9goyO3osD6tFn4Xq96eBW8n8AopXXVxLVaYOJBD-_jaLufc7DFYlPLOWDIwIw/exec'; // Apps Script 웹 앱 URL
     const f = document.getElementById('f'), msg = document.getElementById('msg');
@@ -46,6 +46,9 @@
     f.onsubmit = async e => {
       e.preventDefault();
       const d = Object.fromEntries(new FormData(f));
+      const file = d.img;
+      d.mime = file.type;
+      d.img = await new Promise(ok => { const r = new FileReader(); r.onload = () => ok(r.result.split(',')[1]); r.readAsDataURL(file); });
       if (!confirm(`${d.name}, ${d.h}시간 ${d.m}분, ${d.g}g 예약할까?`)) return;
       f.querySelector('button').disabled = true;
       msg.textContent = '예약 중...';
