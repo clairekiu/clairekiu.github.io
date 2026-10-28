@@ -7,7 +7,7 @@
   <style>
     :root { font: 15px/1.5 -apple-system, system-ui, sans-serif; color-scheme: light dark; }
     body { max-width: 22rem; margin: 3rem auto; padding: 0 1rem; background: Canvas; color: CanvasText; }
-    ::file-selector-button { margin-right: .75rem; padding: .3rem .7rem; font: inherit; font-size: .85rem; border: 1px solid #8886; border-radius: 0; background: none; color: inherit; }
+    ::file-selector-button, #paste { margin-right: .75rem; padding: .3rem .7rem; font: inherit; font-size: .85rem; border: 1px solid #8886; border-radius: 0; background: none; color: inherit; }
     h1 { font-size: 1.1rem; font-weight: 600; margin: 0; }
     a { color: inherit; font-size: .85rem; opacity: .5; }
     label { display: block; margin: 1.25rem 0 0; font-size: .8rem; color: #888; }
@@ -16,7 +16,10 @@
     .row { display: flex; gap: 1rem; }
     .row label { flex: 1; }
     #end, #msg { font-size: .85rem; opacity: .6; margin: .5rem 0 0; }
-    button { width: 100%; margin-top: 2rem; padding: .7rem; font: inherit; border: 1px solid currentColor; border-radius: 0; background: none; color: inherit; cursor: pointer; }
+    #go { width: 100%; margin-top: 2rem; padding: .7rem; font: inherit; border: 1px solid currentColor; border-radius: 0; background: none; color: inherit; cursor: pointer; }
+    #paste { margin-top: .5rem; cursor: pointer; }
+    #thumb { display: block; max-width: 100%; margin-top: .75rem; }
+    #thumb:not([src]), #thumb[src=""] { display: none; }
   </style>
 </head>
 <body>
@@ -35,8 +38,10 @@
     </div>
     <p id="end"></p>
     <label>필라멘트 (g) <input name="g" type="number" step="0.01" min="0" required></label>
-    <label>프리뷰 스크린샷 <input name="img" type="file" accept="image/*" required></label>
-    <button>예약</button>
+    <label>프리뷰 스크린샷 (끌어다 놓기 · ⌘V) <input name="img" type="file" accept="image/*" required></label>
+    <button type="button" id="paste">클립보드에서 붙여넣기</button>
+    <img id="thumb" alt="">
+    <button id="go">예약</button>
   </form>
   <p id="msg"></p>
   <script>
@@ -54,6 +59,25 @@
     setInterval(tick, 1000); f.oninput = tick; tick();
     try { f.name.value = localStorage.name || ''; } catch {}
     f.name.onchange = () => { try { localStorage.name = f.name.value; } catch {} };
+    // 끌어다 놓기 / ⌘V / 버튼 → 파일 칸에 넣기
+    const setImg = file => {
+      if (!file || !file.type.startsWith('image/')) return;
+      const dt = new DataTransfer(); dt.items.add(file); f.img.files = dt.files;
+      f.img.onchange();
+    };
+    f.img.onchange = () => { const file = f.img.files[0]; thumb.src = file ? URL.createObjectURL(file) : ''; };
+    addEventListener('dragover', e => e.preventDefault());
+    addEventListener('drop', e => { e.preventDefault(); setImg(e.dataTransfer.files[0]); });
+    addEventListener('paste', e => setImg([...e.clipboardData.files][0]));
+    paste.onclick = async () => {
+      try {
+        for (const item of await navigator.clipboard.read()) {
+          const type = item.types.find(t => t.startsWith('image/'));
+          if (type) return setImg(new File([await item.getType(type)], 'screenshot.png', { type }));
+        }
+        msg.textContent = '클립보드에 이미지 없음';
+      } catch { msg.textContent = '클립보드 접근 안 됨 — ⌘V로 붙여넣기'; }
+    };
     f.onsubmit = async e => {
       e.preventDefault();
       const d = Object.fromEntries(new FormData(f));
@@ -62,7 +86,7 @@
       d.mime = file.type;
       d.img = await new Promise(ok => { const r = new FileReader(); r.onload = () => ok(r.result.split(',')[1]); r.readAsDataURL(file); });
       if (!confirm(`${d.name}, ${new Date(d.start).toLocaleString('ko-KR')}부터 ${d.h}시간 ${d.m}분, ${d.g}g 예약할까?`)) return;
-      f.querySelector('button').disabled = true;
+      go.disabled = true;
       msg.textContent = '예약 중...';
       try {
         const r = await (await fetch(API, { method: 'POST', body: JSON.stringify(d) })).json();
@@ -71,7 +95,7 @@
       } catch (err) {
         msg.textContent = '실패: ' + err.message;
       }
-      f.querySelector('button').disabled = false;
+      go.disabled = false;
     };
   </script>
 </body>
