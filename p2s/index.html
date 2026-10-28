@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>P2S 9조 예약</title>
+  <style>
+    :root { font-family: Arial, sans-serif; }
+    body { max-width: 24rem; margin: 2rem auto; padding: 0 1rem; }
+    label { display: block; margin: .75rem 0; }
+    input, select { width: 100%; padding: .5rem; font-size: 1rem; box-sizing: border-box; }
+    .row { display: flex; gap: .5rem; }
+    button { width: 100%; padding: .75rem; font-size: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>P2S 9조 예약</h1>
+  <p id="now"></p>
+  <form id="f">
+    <label>팀원 <select name="name" required>
+      <option value="">선택</option>
+      <option>이서진</option><option>문승재</option><option>구민재</option>
+      <option>유동현</option><option>현재성</option><option>강지윤</option>
+    </select></label>
+    <div class="row">
+      <label>시간 <input name="h" type="number" min="0" max="5" value="0" required></label>
+      <label>분 <input name="m" type="number" min="0" max="59" value="0" required></label>
+    </div>
+    <label>필라멘트 (g) <input name="g" type="number" step="0.01" min="0" required></label>
+    <label>프리뷰 링크 (구글 드라이브) <input name="link" type="url" required></label>
+    <label>비밀번호 <input name="pin" type="password" required></label>
+    <button>지금부터 예약</button>
+  </form>
+  <p id="msg"></p>
+  <p><a href="https://docs.google.com/spreadsheets/d/1GXKsIgc7fid99hJcvt9-R6a2oyEkit95HwYUv9HXnF4/edit">시트 보기</a></p>
+  <script>
+    const API = 'https://script.google.com/macros/s/AKfycbx5HrZqi9goyO3osD6tFn4Xq96eBW8n8AopXXVxLVaYOJBD-_jaLufc7DFYlPLOWDIwIw/exec'; // Apps Script 웹 앱 URL
+    const f = document.getElementById('f'), msg = document.getElementById('msg');
+    const tick = () => {
+      const now = new Date(), end = new Date(+now + (f.h.value * 60 + +f.m.value) * 60000);
+      document.getElementById('now').textContent = `${now.toLocaleTimeString('ko-KR')} → ${end.toLocaleTimeString('ko-KR')}`;
+    };
+    setInterval(tick, 1000); f.oninput = tick; tick();
+    try { f.pin.value = localStorage.pin || ''; f.name.value = localStorage.name || ''; } catch {}
+    f.name.onchange = () => { try { localStorage.name = f.name.value; } catch {} };
+    f.onsubmit = async e => {
+      e.preventDefault();
+      const d = Object.fromEntries(new FormData(f));
+      if (!confirm(`${d.name}, ${d.h}시간 ${d.m}분, ${d.g}g 예약할까?`)) return;
+      f.querySelector('button').disabled = true;
+      msg.textContent = '예약 중...';
+      try {
+        const r = await (await fetch(API, { method: 'POST', body: JSON.stringify(d) })).json();
+        if (r.error) throw new Error(r.error);
+        try { localStorage.pin = d.pin; } catch {}
+        msg.textContent = `완료: ${new Date(r.start).toLocaleTimeString('ko-KR')} – ${new Date(r.end).toLocaleTimeString('ko-KR')}`;
+      } catch (err) {
+        msg.textContent = '실패: ' + err.message;
+      }
+      f.querySelector('button').disabled = false;
+    };
+  </script>
+</body>
+</html>
