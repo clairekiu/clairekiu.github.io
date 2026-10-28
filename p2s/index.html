@@ -16,29 +16,35 @@
 <body>
   <h1>P2S 9조 예약</h1>
   <p><a href="https://docs.google.com/spreadsheets/d/1GXKsIgc7fid99hJcvt9-R6a2oyEkit95HwYUv9HXnF4/edit#gid=886213731">9번 팀 시트 열기</a></p>
-  <p id="now"></p>
   <form id="f">
     <label>팀원 <select name="name" required>
       <option value="">선택</option>
       <option>이서진</option><option>문승재</option><option>구민재</option>
       <option>유동현</option><option>현재성</option><option>강지윤</option>
     </select></label>
+    <label>시작 <input name="start" type="datetime-local" required></label>
     <div class="row">
       <label>시간 <input name="h" type="number" min="0" max="5" value="0" required></label>
       <label>분 <input name="m" type="number" min="0" max="59" value="0" required></label>
     </div>
+    <p id="end"></p>
     <label>필라멘트 (g) <input name="g" type="number" step="0.01" min="0" required></label>
     <label>프리뷰 스크린샷 <input name="img" type="file" accept="image/*" required></label>
     <label>비밀번호 <input name="pin" type="password" required></label>
-    <button>지금부터 예약</button>
+    <button>예약</button>
   </form>
   <p id="msg"></p>
   <script>
     const API = 'https://script.google.com/macros/s/AKfycbz9Y6d4liyPHI4pKsD1oyFzaX99N490WvS49Gc22lZnqJXmwPZ-BDtmJuyy_s60MnIT9Q/exec'; // Apps Script 웹 앱 URL
     const f = document.getElementById('f'), msg = document.getElementById('msg');
+    // 직접 고치기 전까지는 시작 = 지금
+    let edited = false;
+    f.start.oninput = () => edited = true;
+    const local = t => new Date(t - t.getTimezoneOffset() * 60000).toISOString().slice(0, 16);
     const tick = () => {
-      const now = new Date(), end = new Date(+now + (f.h.value * 60 + +f.m.value) * 60000);
-      document.getElementById('now').textContent = `${now.toLocaleTimeString('ko-KR')} → ${end.toLocaleTimeString('ko-KR')}`;
+      if (!edited) f.start.value = local(new Date());
+      const end = new Date(+new Date(f.start.value) + (f.h.value * 60 + +f.m.value) * 60000);
+      document.getElementById('end').textContent = '끝: ' + end.toLocaleString('ko-KR');
     };
     setInterval(tick, 1000); f.oninput = tick; tick();
     try { f.pin.value = localStorage.pin || ''; f.name.value = localStorage.name || ''; } catch {}
@@ -46,10 +52,11 @@
     f.onsubmit = async e => {
       e.preventDefault();
       const d = Object.fromEntries(new FormData(f));
+      d.start = new Date(d.start).toISOString();
       const file = d.img;
       d.mime = file.type;
       d.img = await new Promise(ok => { const r = new FileReader(); r.onload = () => ok(r.result.split(',')[1]); r.readAsDataURL(file); });
-      if (!confirm(`${d.name}, ${d.h}시간 ${d.m}분, ${d.g}g 예약할까?`)) return;
+      if (!confirm(`${d.name}, ${new Date(d.start).toLocaleString('ko-KR')}부터 ${d.h}시간 ${d.m}분, ${d.g}g 예약할까?`)) return;
       f.querySelector('button').disabled = true;
       msg.textContent = '예약 중...';
       try {
